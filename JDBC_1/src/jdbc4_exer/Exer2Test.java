@@ -7,9 +7,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.Scanner;
 
+import jdbc3.util.JDBCUtils;
 import org.junit.Test;
 
-import com.atguigu3.util.JDBCUtils;
+import jdbc3.util.JDBCUtils;
 
 //课后练习2
 public class Exer2Test {

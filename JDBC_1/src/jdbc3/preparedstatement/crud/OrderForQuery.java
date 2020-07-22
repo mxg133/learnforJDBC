@@ -9,8 +9,8 @@ import java.sql.ResultSetMetaData;
 
 import org.junit.Test;
 
-import com.atguigu3.bean.Order;
-import com.atguigu3.util.JDBCUtils;
+import jdbc3.bean.Order;
+import jdbc3.util.JDBCUtils;
 
 /**
  * 

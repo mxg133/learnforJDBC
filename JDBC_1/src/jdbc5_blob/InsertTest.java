@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 
 import org.junit.Test;
 
-import com.atguigu3.util.JDBCUtils;
+import jdbc3.util.JDBCUtils;
 
 /*
  * 使用PreparedStatement实现批量数据的操作

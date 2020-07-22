@@ -41,8 +41,6 @@ public class PreparedStatementTest {
 	/**
 	 *
 	 * @Description 针对于不同的表的通用的查询操作，返回表中的一条记录
-	 * @author shkstart
-	 * @date 上午11:42:23
 	 * @param clazz
 	 * @param sql
 	 * @param args

@@ -9,8 +9,8 @@ import java.sql.ResultSetMetaData;
 
 import org.junit.Test;
 
-import com.atguigu3.bean.Customer;
-import com.atguigu3.util.JDBCUtils;
+import jdbc3.bean.Customer;
+import jdbc3.util.JDBCUtils;
 
 /**
  * 

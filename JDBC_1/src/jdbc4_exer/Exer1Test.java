@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import com.atguigu3.util.JDBCUtils;
+import jdbc3.util.JDBCUtils;
 //课后练习1
 public class Exer1Test {
 	

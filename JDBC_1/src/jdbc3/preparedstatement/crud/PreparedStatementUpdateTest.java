@@ -11,9 +11,8 @@ import java.util.Properties;
 
 import org.junit.Test;
 
-import com.atguigu1.connection.ConnectionTest;
-import com.atguigu3.util.JDBCUtils;
-
+import jdbc1_Connection.ConnectionTest;
+import jdbc3.util.JDBCUtils;
 /*
  * 使用PreparedStatement来替换Statement,实现对数据表的增删改操作
  * 
