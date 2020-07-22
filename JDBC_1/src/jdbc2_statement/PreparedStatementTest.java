@@ -12,7 +12,7 @@ import org.junit.Test;
 import jdbc3.util.JDBCUtils;
 
 /**
- *演示使用PreparedStatement替换Statement，解决SQL注入问题
+ *演示使用PreparedStatement替换Statement，解决SQL注入问题!
  *
  * 除了解决Statement的拼串、sql问题之外，PreparedStatement还有哪些好处呢？
  * 1.PreparedStatement操作Blob的数据，而Statement做不到。
