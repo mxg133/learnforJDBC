@@ -29,6 +29,7 @@ public class PreparedStatementUpdateTest {
 		
 		String sql = "update `order` set order_name = ? where order_id = ?";
 		update(sql,"DD","2");
+		System.out.println("操作成功");
 		
 	}
 	
