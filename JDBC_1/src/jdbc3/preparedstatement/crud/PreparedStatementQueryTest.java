@@ -86,7 +86,7 @@ public class PreparedStatementQueryTest {
 	@Test
 	public void testGetInstance(){
 		String sql = "select id,name,email from customers where id < ?";
-		List list = getInstance(Customer.class, sql, 12);
+		List list = getInstanceOneList(Customer.class, sql, 12);
 		list.forEach(System.out::println);
 
 //		String sql1 = "select order_id orderId,order_name orderName from `order` where order_id = ?";
@@ -101,7 +101,7 @@ public class PreparedStatementQueryTest {
 	 * @param args
 	 * @return
 	 */
-	public <T> List getInstance(Class<T> clazz,String sql, Object... args) {
+	public <T> List getInstanceOneList(Class<T> clazz,String sql, Object... args) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -148,4 +148,50 @@ public class PreparedStatementQueryTest {
 		return null;
 	}
 
+	//***************
+	public <T> T getInstanceOneIns(Class<T> clazz,String sql, Object... args) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtils.getConnection();
+
+			ps = conn.prepareStatement(sql);
+			for (int i = 0; i < args.length; i++) {
+				ps.setObject(i + 1, args[i]);
+			}
+
+			rs = ps.executeQuery();
+			// 获取结果集的元数据 :ResultSetMetaData
+			ResultSetMetaData rsmd = rs.getMetaData();
+			// 通过ResultSetMetaData获取结果集中的列数
+			int columnCount = rsmd.getColumnCount();
+
+			if (rs.next()) {
+				T t = clazz.newInstance();
+				// 处理结果集一行数据中的每一个列
+				for (int i = 0; i < columnCount; i++) {
+					// 获取列值
+					Object columValue = rs.getObject(i + 1);
+
+					// 获取每个列的列名
+					// String columnName = rsmd.getColumnName(i + 1);
+					String columnLabel = rsmd.getColumnLabel(i + 1);
+
+					// 给t对象指定的columnName属性，赋值为columValue：通过反射
+					Field field = clazz.getDeclaredField(columnLabel);
+					field.setAccessible(true);
+					field.set(t, columValue);
+				}
+				return t;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtils.closeResource(conn, ps, rs);
+
+		}
+
+		return null;
+	}
 }
