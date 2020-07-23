@@ -14,6 +14,8 @@ import jdbc3.bean.Customer;
 import jdbc3.bean.Order;
 import jdbc3.util.JDBCUtils;
 
+import javax.sound.midi.Soundbank;
+
 /**
  * 
  * @Description 使用PreparedStatement实现针对于不同表的通用的查询操作
@@ -83,13 +85,13 @@ public class PreparedStatementQueryTest {
 	
 	@Test
 	public void testGetInstance(){
-		String sql = "select id,name,email from customers where id = ?";
-		Customer customer = getInstance(Customer.class,sql,12);
-		System.out.println(customer);
-		
-		String sql1 = "select order_id orderId,order_name orderName from `order` where order_id = ?";
-		Order order = getInstance(Order.class, sql1, 1);
-		System.out.println(order);
+		String sql = "select id,name,email from customers where id < ?";
+		List list = getInstance(Customer.class, sql, 12);
+		list.forEach(System.out::println);
+
+//		String sql1 = "select order_id orderId,order_name orderName from `order` where order_id = ?";
+//		Order order = getInstance(Order.class, sql1, 1);
+//		System.out.println(order);
 	}
 	/**
 	 * 
@@ -99,7 +101,7 @@ public class PreparedStatementQueryTest {
 	 * @param args
 	 * @return
 	 */
-	public <T> T getInstance(Class<T> clazz,String sql, Object... args) {
+	public <T> List getInstance(Class<T> clazz,String sql, Object... args) {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -116,8 +118,8 @@ public class PreparedStatementQueryTest {
 			ResultSetMetaData rsmd = rs.getMetaData();
 			// 通过ResultSetMetaData获取结果集中的列数
 			int columnCount = rsmd.getColumnCount();
-
-			if (rs.next()) {
+			ArrayList<T> list = new ArrayList<>();
+			while (rs.next()) {
 				T t = clazz.newInstance();
 				// 处理结果集一行数据中的每一个列
 				for (int i = 0; i < columnCount; i++) {
@@ -133,8 +135,9 @@ public class PreparedStatementQueryTest {
 					field.setAccessible(true);
 					field.set(t, columValue);
 				}
-				return t;
+				list.add(t);
 			}
+			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
