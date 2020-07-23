@@ -20,10 +20,10 @@ public class BlobText {
         Connection connection = JDBCUtils.getConnection();
         String sql = "INSERT INTO customers(name, email, birth, photo) VALUES(?,?,?,?);";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setObject(1, "李宇春");
-        ps.setObject(2, "111@qq.com");
-        ps.setObject(3, "2009-2-3");
-        FileInputStream is = new FileInputStream("playgirl.jpg");
+        ps.setObject(1, "高佳好");
+        ps.setObject(2, "gaojiahao@gmail.com");
+        ps.setObject(3, "1997-12-5");
+        FileInputStream is = new FileInputStream("girl.jpg");
         ps.setBlob(4,is );
         ps.execute();
         JDBCUtils.closeResource(connection, ps);
