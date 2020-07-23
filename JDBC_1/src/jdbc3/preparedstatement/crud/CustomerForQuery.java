@@ -15,9 +15,6 @@ import jdbc3.util.JDBCUtils;
 /**
  * 
  * @Description 针对于Customers表的查询操作
- * @author shkstart  Email:shkstart@126.com
- * @version 
- * @date 上午10:04:55
  *
  */
 public class CustomerForQuery {
@@ -36,14 +33,12 @@ public class CustomerForQuery {
 	/**
 	 * 
 	 * @Description 针对于customers表的通用的查询操作
-	 * @author shkstart
-	 * @throws Exception 
-	 * @date 上午10:23:40
+	 * @throws Exception
 	 */
 	public Customer queryForCustomers(String sql,Object...args){
 		Connection conn = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
+		ResultSet resultSet = null;
 		try {
 			conn = JDBCUtils.getConnection();
 			
@@ -52,42 +47,41 @@ public class CustomerForQuery {
 				ps.setObject(i + 1, args[i]);
 			}
 			
-			rs = ps.executeQuery();
+			resultSet = ps.executeQuery();
 			//获取结果集的元数据 :ResultSetMetaData
-			ResultSetMetaData rsmd = rs.getMetaData();
+			ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 			//通过ResultSetMetaData获取结果集中的列数
-			int columnCount = rsmd.getColumnCount();
+			int columnCount = resultSetMetaData.getColumnCount();
 			
-			if(rs.next()){
-				Customer cust = new Customer();
+			if(resultSet.next()){
+				Customer customer = new Customer();
 				//处理结果集一行数据中的每一个列
 				for(int i = 0;i <columnCount;i++){
 					//获取列值
-					Object columValue = rs.getObject(i + 1);
+					Object columValue = resultSet.getObject(i + 1);
 					
 					//获取每个列的列名
 //					String columnName = rsmd.getColumnName(i + 1);
-					String columnLabel = rsmd.getColumnLabel(i + 1);
+					String columnLabel = resultSetMetaData.getColumnLabel(i + 1);
 					
 					//给cust对象指定的columnName属性，赋值为columValue：通过反射
-					Field field = Customer.class.getDeclaredField(columnLabel);
+
+					Class<Customer> clazz = Customer.class;
+					Field field = clazz.getDeclaredField(columnLabel);
 					field.setAccessible(true);
-					field.set(cust, columValue);
+					field.set(customer, columValue);
 				}
-				return cust;
+				return customer;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			JDBCUtils.closeResource(conn, ps, rs);
+			JDBCUtils.closeResource(conn, ps, resultSet);
 			
 		}
 		
 		return null;
-		
-		
 	}
-	
 	
 	@Test
 	public void testQuery1() {
@@ -116,9 +110,10 @@ public class CustomerForQuery {
 				
 			//方式二：
 //			Object[] data = new Object[]{id,name,email,birth};
-				//方式三：将数据封装为一个对象（推荐）
-				Customer customer = new Customer(id, name, email, birth);
-				System.out.println(customer);
+
+			//方式三：将数据封装为一个对象（推荐）
+			Customer customer = new Customer(id, name, email, birth);
+			System.out.println(customer);
 				
 			}
 		} catch (Exception e) {

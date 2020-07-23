@@ -13,12 +13,10 @@ import org.junit.Test;
 
 import jdbc1_Connection.ConnectionTest;
 import jdbc3.util.JDBCUtils;
-/*
+/**
  * 使用PreparedStatement来替换Statement,实现对数据表的增删改操作
  * 
  * 增删改；查
- * 
- * 
  */
 public class PreparedStatementUpdateTest {
 	
