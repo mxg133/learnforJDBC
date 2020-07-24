@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
 
-import com.atguigu2.bean.Customer;
+import jdbc2.bean.Customer;
 
 /*
  * 此接口用于规范针对于customers表的常用操作

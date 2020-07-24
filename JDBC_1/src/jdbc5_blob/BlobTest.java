@@ -72,8 +72,8 @@ public class BlobTest {
 				System.out.println(cust);
 				
 				//将Blob类型的字段下载下来，以文件的方式保存在本地
-				Blob photo = rs.getBlob("photo");
-				is = photo.getBinaryStream();
+				Blob blobphoto = rs.getBlob("photo");
+				is = blobphoto.getBinaryStream();
 				fos = new FileOutputStream("zhangyuhao.jpg");
 				byte[] buffer = new byte[1024];
 				int len;

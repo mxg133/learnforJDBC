@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 import org.junit.Test;
 
-import com.atguigu1.util.JDBCUtils;
+import jdbc1.util.JDBCUtils;
 
 public class ConnectionTest {
 	

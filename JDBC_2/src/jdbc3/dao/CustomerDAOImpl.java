@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
 
-import com.atguigu2.bean.Customer;
+import jdbc2.bean.Customer;
 
 public class CustomerDAOImpl extends BaseDAO<Customer> implements CustomerDAO{
 	

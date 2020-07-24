@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import com.atguigu1.util.JDBCUtils;
+import jdbc1.util.JDBCUtils;
 /*
  * 1.什么叫数据库事务？
  * 事务：一组逻辑操作单元,使数据从一种状态变换到另一种状态。
@@ -71,15 +71,6 @@ public class TransactionTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			
-			//修改其为自动提交数据
-			//主要针对于使用数据库连接池的使用
-			try {
-				conn.setAutoCommit(true);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
 			// 5.资源的关闭
 			JDBCUtils.closeResource(conn, ps);
 
@@ -143,6 +134,13 @@ public class TransactionTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			//修改其为自动提交数据
+			//主要针对于使用数据库连接池的使用
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			// 4.资源的关闭
 			JDBCUtils.closeResource(null, ps);
 

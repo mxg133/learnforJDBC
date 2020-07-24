@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.atguigu1.util.JDBCUtils;
+import jdbc1.util.JDBCUtils;
 
 /*
  * DAO: data(base) access object
