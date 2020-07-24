@@ -1,6 +1,4 @@
-package jdbc2.dao.junit;
-
-import static org.junit.Assert.*;
+package jdbc2_DAO1.dao.junit;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,9 +6,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import jdbc1.util.JDBCUtils;
-import jdbc2.bean.Customer;
-import jdbc2.dao.CustomerDAOImpl;
+import jdbc1_transaction.util.JDBCUtils;
+import jdbc2_DAO1.bean.Customer;
+import jdbc2_DAO1.dao.CustomerDAOImpl;
 
 public class CustomerDAOImplTest {
 

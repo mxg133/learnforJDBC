@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * @author 孟享广
  * @create 2020-07-24 1:13 下午
  */
-public class update {
+public abstract class updateDAO {
     //通用的增删改操作
     public void update(String sql,Object ...args){//sql中占位符的个数与可变形参的长度相同！
         Connection conn = null;

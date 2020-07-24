@@ -1,4 +1,4 @@
-package jdbc2.bean;
+package jdbc2_DAO1.bean;
 
 import java.sql.Date;
 

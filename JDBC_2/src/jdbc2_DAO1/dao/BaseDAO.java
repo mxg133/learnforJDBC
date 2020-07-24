@@ -1,4 +1,4 @@
-package jdbc2.dao;
+package jdbc2_DAO1.dao;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jdbc1.util.JDBCUtils;
+import jdbc1_transaction.util.JDBCUtils;
 
 /*
  * DAO: data(base) access object
@@ -33,7 +33,6 @@ public abstract class BaseDAO {
 		} finally {
 			// 4.资源的关闭
 			JDBCUtils.closeResource(null, ps);
-
 		}
 		return 0;
 
@@ -78,11 +77,10 @@ public abstract class BaseDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtils.closeResource(null, ps, rs);
-
 		}
-
 		return null;
 	}
+
 	// 通用的查询操作，用于返回数据表中的多条记录构成的集合（version 2.0：考虑上事务）
 	public <T> List<T> getForList(Connection conn, Class<T> clazz, String sql, Object... args) {
 		PreparedStatement ps = null;
@@ -125,11 +123,10 @@ public abstract class BaseDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtils.closeResource(null, ps, rs);
-
 		}
-
 		return null;
 	}
+
 	//用于查询特殊值的通用的方法
 	public <E> E getValue(Connection conn,String sql,Object...args){
 		PreparedStatement ps = null;
@@ -138,9 +135,8 @@ public abstract class BaseDAO {
 			ps = conn.prepareStatement(sql);
 			for(int i = 0;i < args.length;i++){
 				ps.setObject(i + 1, args[i]);
-				
 			}
-			
+
 			rs = ps.executeQuery();
 			if(rs.next()){
 				return (E) rs.getObject(1);
@@ -149,9 +145,7 @@ public abstract class BaseDAO {
 			e.printStackTrace();
 		}finally{
 			JDBCUtils.closeResource(null, ps, rs);
-			
 		}
 		return null;
-		
 	}	
 }

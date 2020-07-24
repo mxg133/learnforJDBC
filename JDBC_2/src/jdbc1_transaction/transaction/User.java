@@ -1,4 +1,4 @@
-package jdbc1.transaction;
+package jdbc1_transaction.transaction;
 
 public class User {
 	private String user;

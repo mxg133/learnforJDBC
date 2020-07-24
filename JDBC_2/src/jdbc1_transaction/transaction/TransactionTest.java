@@ -1,4 +1,4 @@
-package jdbc1.transaction;
+package jdbc1_transaction.transaction;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
-import jdbc1.util.JDBCUtils;
+import jdbc1_transaction.util.JDBCUtils;
 /*
  * 1.什么叫数据库事务？
  * 事务：一组逻辑操作单元,使数据从一种状态变换到另一种状态。

@@ -1,10 +1,10 @@
-package jdbc1.transaction;
+package jdbc1_transaction.transaction;
 
 import java.sql.Connection;
 
 import org.junit.Test;
 
-import jdbc1.util.JDBCUtils;
+import jdbc1_transaction.util.JDBCUtils;
 
 public class ConnectionTest {
 	

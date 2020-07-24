@@ -1,16 +1,13 @@
-package jdbc3.dao;
+package jdbc2_DAO1.dao;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
 
-import jdbc2.bean.Customer;
+import jdbc2_DAO1.bean.Customer;
 
-public class CustomerDAOImpl extends BaseDAO<Customer> implements CustomerDAO{
-	
-	
+public class CustomerDAOImpl extends BaseDAO implements CustomerDAO{
+
 	@Override
 	public void insert(Connection conn, Customer cust) {
 		String sql = "insert into customers(name,email,birth)values(?,?,?)";
@@ -32,14 +29,14 @@ public class CustomerDAOImpl extends BaseDAO<Customer> implements CustomerDAO{
 	@Override
 	public Customer getCustomerById(Connection conn, int id) {
 		String sql = "select id,name,email,birth from customers where id = ?";
-		Customer customer = getInstance(conn, sql,id);
+		Customer customer = getInstance(conn,Customer.class, sql,id);
 		return customer;
 	}
 
 	@Override
 	public List<Customer> getAll(Connection conn) {
 		String sql = "select id,name,email,birth from customers";
-		List<Customer> list = getForList(conn, sql);
+		List<Customer> list = getForList(conn, Customer.class, sql);
 		return list;
 	}
 

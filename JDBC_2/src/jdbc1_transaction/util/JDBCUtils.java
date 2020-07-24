@@ -1,4 +1,4 @@
-package jdbc1.util;
+package jdbc1_transaction.util;
 
 import java.io.InputStream;
 import java.sql.Connection;

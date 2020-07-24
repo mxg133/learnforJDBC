@@ -1,4 +1,4 @@
-package jdbc3.dao;
+package jdbc3_DAO2.dao;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jdbc1.util.JDBCUtils;
+import jdbc1_transaction.util.JDBCUtils;
 
 /*
  * DAO: data(base) access object

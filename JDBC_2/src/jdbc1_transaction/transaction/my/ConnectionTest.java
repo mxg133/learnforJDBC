@@ -1,6 +1,6 @@
-package jdbc1.transaction.my;
+package jdbc1_transaction.transaction.my;
 
-import jdbc1.util.JDBCUtils;
+import jdbc1_transaction.util.JDBCUtils;
 import org.junit.Test;
 
 import java.sql.Connection;

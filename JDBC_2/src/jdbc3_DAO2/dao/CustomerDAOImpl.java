@@ -1,13 +1,14 @@
-package jdbc2.dao;
+package jdbc3_DAO2.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
 
-import jdbc2.bean.Customer;
+import jdbc2_DAO1.bean.Customer;
 
-public class CustomerDAOImpl extends BaseDAO implements CustomerDAO{
-
+public class CustomerDAOImpl extends BaseDAO<Customer> implements CustomerDAO{
+	
+	
 	@Override
 	public void insert(Connection conn, Customer cust) {
 		String sql = "insert into customers(name,email,birth)values(?,?,?)";
@@ -29,14 +30,14 @@ public class CustomerDAOImpl extends BaseDAO implements CustomerDAO{
 	@Override
 	public Customer getCustomerById(Connection conn, int id) {
 		String sql = "select id,name,email,birth from customers where id = ?";
-		Customer customer = getInstance(conn,Customer.class, sql,id);
+		Customer customer = getInstance(conn, sql,id);
 		return customer;
 	}
 
 	@Override
 	public List<Customer> getAll(Connection conn) {
 		String sql = "select id,name,email,birth from customers";
-		List<Customer> list = getForList(conn, Customer.class, sql);
+		List<Customer> list = getForList(conn, sql);
 		return list;
 	}
 
