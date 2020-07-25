@@ -26,7 +26,7 @@ public class C3P0Test {
 		Connection conn = cpds.getConnection();
 		System.out.println(conn);
 
-		//销毁c3p0数据库连接池
+		//销毁c3p0数据库连接池 --一般是不会关闭池子的
 //		DataSources.destroy( cpds );
 	}
 	//方式二：使用配置文件

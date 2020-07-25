@@ -1,9 +1,11 @@
 package jdbc4.connection.my;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.c3p0.DataSources;
 import org.junit.Test;
 
 import java.beans.PropertyVetoException;
+import java.sql.Connection;
 
 /**
  * @author 孟享广
@@ -17,6 +19,19 @@ public class C3P0Test {
         cpds.setJdbcUrl( "jdbc:mysql://localhost:3306/test" );
         cpds.setUser("root");
         cpds.setPassword("mklmklmkl");
+
+        cpds.setInitialPoolSize(10);//10个连接
+
+        Connection conn = cpds.getConnection();
+        System.out.println(conn);
+
+        DataSources.destroy( cpds );
+    }
+
+    @Test
+    public void test2(){
+        //
+
 
     }
 }
