@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.beans.PropertyVetoException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * @author 孟享广
@@ -29,8 +30,13 @@ public class C3P0Test {
     }
 
     @Test
-    public void test2(){
+    public void test2() throws Exception {
         //
+        ComboPooledDataSource cpds = new ComboPooledDataSource("helloc3p0");
+        Connection conn = cpds.getConnection();
+
+        System.out.println(conn);
+        System.out.println("ok!");
 
 
     }
