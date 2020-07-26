@@ -18,7 +18,9 @@ import javax.sql.DataSource;
 //import org.apache.commons.dbutils.DbUtils;
 //
 //import com.alibaba.druid.pool.DruidDataSourceFactory;
+import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 public class JDBCUtils {
 	/**
@@ -50,8 +52,6 @@ public class JDBCUtils {
 	/**490
 	 *
 	 * @Description 使用C3P0的数据库连接池技术
-	 * @author shkstart
-	 * @date 下午3:01:25
 	 * @return
 	 * @throws SQLException
 	 */
@@ -66,81 +66,77 @@ public class JDBCUtils {
 	/**
 	 *
 	 * @Description 使用DBCP数据库连接池技术获取数据库连接
-	 * @author shkstart
-	 * @date 下午3:35:25
 	 * @return
 	 * @throws Exception
 	 */
-//	//创建一个DBCP数据库连接池
-//	private static DataSource source;
-//	static{
-//		try {
-//			Properties pros = new Properties();
-//			FileInputStream is = new FileInputStream(new File("src/dbcp.properties"));
-//			pros.load(is);
-//			source = BasicDataSourceFactory.createDataSource(pros);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	public static Connection getConnection2() throws Exception{
-//
-//		Connection conn = source.getConnection();
-//
-//		return conn;
-//	}
-//
-//	/**
-//	 * 使用Druid数据库连接池技术
-//	 */
-//	private static DataSource source1;
-//	static{
-//		try {
-//			Properties pros = new Properties();
-//
-//			InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("druid.properties");
-//
-//			pros.load(is);
-//
-//			source1 = DruidDataSourceFactory.createDataSource(pros);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	public static Connection getConnection3() throws SQLException{
-//
-//		Connection conn = source1.getConnection();
-//		return conn;
-//	}
-//
-//
-//	/**
-//	 *
-//	 * @Description 关闭连接和Statement的操作
-//	 * @author shkstart
-//	 * @date 上午9:12:40
-//	 * @param conn
-//	 * @param ps
-//	 */
-//	public static void closeResource(Connection conn,Statement ps){
-//		try {
-//			if(ps != null)
-//				ps.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			if(conn != null)
-//				conn.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	//创建一个DBCP数据库连接池
+	private static DataSource source;
+	static{
+		try {
+			Properties pros = new Properties();
+			FileInputStream is = new FileInputStream(new File("src/dbcp.properties"));
+			pros.load(is);
+			source = BasicDataSourceFactory.createDataSource(pros);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static Connection getConnection2() throws Exception{
+
+		Connection conn = source.getConnection();
+
+		return conn;
+	}
+
+	/**
+	 * 使用Druid数据库连接池技术
+	 */
+	private static DataSource source1;
+	static{
+		try {
+			Properties pros = new Properties();
+
+			InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("druid.properties");
+
+			pros.load(is);
+
+			source1 = DruidDataSourceFactory.createDataSource(pros);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public static Connection getConnection3Druid() throws SQLException{
+
+		Connection conn = source1.getConnection();
+		return conn;
+	}
+
+
+	/**
+	 *
+	 * @Description 关闭连接和Statement的操作
+	 * @author shkstart
+	 * @date 上午9:12:40
+	 * @param conn
+	 * @param ps
+	 */
+	public static void closeResource(Connection conn,Statement ps){
+		try {
+			if(ps != null)
+				ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			if(conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 //	/**
 //	 *
 //	 * @Description 关闭资源操作
-//	 * @author shkstart
-//	 * @date 上午10:21:15
 //	 * @param conn
 //	 * @param ps
 //	 * @param rs
@@ -169,8 +165,6 @@ public class JDBCUtils {
 //	/**
 //	 *
 //	 * @Description 使用dbutils.jar中提供的DbUtils工具类，实现资源的关闭
-//	 * @author shkstart
-//	 * @date 下午4:53:09
 //	 * @param conn
 //	 * @param ps
 //	 * @param rs
