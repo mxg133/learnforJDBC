@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
+import org.apache.commons.dbutils.DbUtils;
 
 public class JDBCUtils {
 	/**
@@ -115,8 +116,6 @@ public class JDBCUtils {
 	/**
 	 *
 	 * @Description 关闭连接和Statement的操作
-	 * @author shkstart
-	 * @date 上午9:12:40
 	 * @param conn
 	 * @param ps
 	 */
@@ -134,61 +133,61 @@ public class JDBCUtils {
 			e.printStackTrace();
 		}
 	}
-//	/**
-//	 *
-//	 * @Description 关闭资源操作
-//	 * @param conn
-//	 * @param ps
-//	 * @param rs
-//	 */
-//	public static void closeResource(Connection conn,Statement ps,ResultSet rs){
+	/**
+	 *
+	 * @Description 关闭资源操作
+	 * @param conn
+	 * @param ps
+	 * @param rs
+	 */
+	public static void closeResource(Connection conn,Statement ps,ResultSet rs){
+		try {
+			if(ps != null)
+				ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			if(conn != null)
+				conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			if(rs != null)
+				rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 *
+	 * @Description 使用dbutils.jar中提供的DbUtils工具类，实现资源的关闭
+	 * @param conn
+	 * @param ps
+	 * @param rs
+	 */
+	public static void closeResource1(Connection conn,Statement ps,ResultSet rs){
 //		try {
-//			if(ps != null)
-//				ps.close();
+//			DbUtils.close(conn);
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
 //		try {
-//			if(conn != null)
-//				conn.close();
+//			DbUtils.close(ps);
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
 //		try {
-//			if(rs != null)
-//				rs.close();
+//			DbUtils.close(rs);
 //		} catch (SQLException e) {
 //			e.printStackTrace();
 //		}
-//	}
-//
-//	/**
-//	 *
-//	 * @Description 使用dbutils.jar中提供的DbUtils工具类，实现资源的关闭
-//	 * @param conn
-//	 * @param ps
-//	 * @param rs
-//	 */
-//	public static void closeResource1(Connection conn,Statement ps,ResultSet rs){
-////		try {
-////			DbUtils.close(conn);
-////		} catch (SQLException e) {
-////			e.printStackTrace();
-////		}
-////		try {
-////			DbUtils.close(ps);
-////		} catch (SQLException e) {
-////			e.printStackTrace();
-////		}
-////		try {
-////			DbUtils.close(rs);
-////		} catch (SQLException e) {
-////			e.printStackTrace();
-////		}
-//
-//		DbUtils.closeQuietly(conn);
-//		DbUtils.closeQuietly(ps);
-//		DbUtils.closeQuietly(rs);
-//	}
+
+		DbUtils.closeQuietly(conn);
+		DbUtils.closeQuietly(ps);
+		DbUtils.closeQuietly(rs);
+	}
 
 }
